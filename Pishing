@@ -1,0 +1,46 @@
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+def send_bonus_email(receiver_email):
+    # Configura le informazioni dell'account email
+    sender_email = 'YOUR_EMAIL'
+    password = 'YOUR_PASSWORD'
+
+    # Crea il contenuto dell'email utilizzando un template
+    template = """
+    Caro Utente,
+
+    Siamo lieti di informarti che hai ricevuto un bonus per la fedeltà! Di seguito trovi i dettagli del pagamento:
+
+    Abbonamento annuo: €155,88
+    Abbonamento annuo feeltà: €100
+    Valido sino al 10 luglio 2023
+    
+    Clicca sul seguente link per effettuare il pagamento:
+    GENERATE LINK WITH "ZPHISHER" 
+
+    Grazie per la fiducia che riponi nei nostri servizi!
+
+    Cordiali saluti,
+    Team Netflix
+    """
+
+    message = MIMEMultipart()
+    message['From'] = sender_email
+    message['To'] = receiver_email
+    message['Subject'] = 'Bonus fedeltà - Pagamento'
+
+    message.attach(MIMEText(template, 'plain'))
+
+    # Connetti al server SMTP e invia l'email
+    with smtplib.SMTP('smtp.gmail.com', 587) as server:
+        server.starttls()
+        server.login(sender_email, password)
+        server.send_message(message)
+
+    print("Email inviata con successo!")
+
+# Utilizzo della funzione per inviare l'email di bonus ferie
+destinatario = 'DESTINATARY_MAIL'
+send_bonus_email(destinatario)
